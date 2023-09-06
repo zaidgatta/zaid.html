@@ -1,42 +1,55 @@
-<html>
-    <head>
-        <h1>
-            <u><center>Tourisum Package</center></u>
-        </h1>
-    </head>
-    <body>
-        <p>We represent a new and best packages for you in low price.</p>
-        <p>Click on your favourite place and book your ticket now.</p>
-        <b>
-            <u><h1>Balochistan</h1></u>
-            <ul><h2>
-                <li><a href="Balochistan/Kalat.html">Kalat</a></li>
-            </h2></ul>
-            <img src="https://images.unsplash.com/photo-1444723121867-7a241cacace9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGthbGF0JTIwY2l0eXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"/>
-            <ul><h2>
-                <li><a href="Balochistan/Quetta.html">Quetta</a></li>
-            </h2></ul>
-            <img src="https://images.unsplash.com/photo-1622592292759-329197268452?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHF1ZXR0YXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"/>
-            <u><h1>Punjab</h1></u>
-            <ul><h2>
-                <li><a href="Punjab/Faislabad.html">Faislabad</a></li>
-            </h2></ul>
-            <img src="https://images.unsplash.com/photo-1638963212975-8b3737bf4320?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZmFpc2FsYWJhZCUyMGNpdHl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"/>
-            <ul><h2>
-                <li><a href="Punjab/Lahore.html">Lahore</a></li>
-            </h2></ul>
-            <img src="https://images.unsplash.com/photo-1622546758596-f1f06ba11f58?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFob3JlJTIwY2l0eXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"/>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2>Expense Tracker</h2>
+    <div class="container">
+      <h4>Your Balance</h4>
+      <h1 id="balance">$0.00</h1>
+      <div class="inc-exp-container">
+        <div>
+          <h4>Income</h4>
+          <p id="money-plus" class="money-plus">
+            +$0.00
+          </p>
+        </div>
+        <div>
+          <h4>Expense</h4>
+          <p id="money-minus" class="money-minus">
+            -$0.00
+          </p>
+        </div>
+      </div>
 
-            <u><h1>Sindh</h1></u>
-            <ul><h2>
-                <li><a href="Sindh/Larkana.html">Larkana</a></li>
-            </h2></ul>
-            <img src="https://images.unsplash.com/photo-1427694012323-fb5e8b0c165b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bGFya2FuYSUyMGNpdHl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"/>
-            <ul><h2>
-                <li><a href="Sindh/Sukkur.html">Sukkur</a></li>
-            </h2></ul>
-            <img src="https://images.unsplash.com/photo-1642654836371-46d4a1a4575c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3Vra3VyfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"/>
-            
-        </b>
-    </body>
+      <h3>History</h3>
+      <ul id="list" class="list">
+        <!-- <li class="minus">
+          Cash <span>-$400</span
+          ><button class="delete-btn">x</button>
+        </li> -->
+      </ul>
+      <h3>Add New Transition</h3>
+      <form id="form">
+          <div class="form-control">
+              <label for="text">Text</label>
+              <input type="text" id="text" placeholder="Enter Text...."/>
+          </div>
+          <div class="form-control">
+              <label for="amount">Amount <br> (negative - expense ,positive - income )</label>
+              <input type="number" id="amount" placeholder="Enter amount..."> 
+          </div>
+          <button class="btn">All transaction</button>
+      </form>
+    </div>
+    <!-- JavaYscript Project  -->
+    <script src="script.js"></script>
+  </body>
 </html>
