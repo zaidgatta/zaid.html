@@ -1,132 +1,185 @@
-//1
-const balance = document.getElementById(
-    "balance"
-  );
-  const money_plus = document.getElementById(
-    "money-plus"
-  );
-  const money_minus = document.getElementById(
-    "money-minus"
-  );
-  const list = document.getElementById("list");
-  const form = document.getElementById("form");
-  const text = document.getElementById("text");
-  const amount = document.getElementById("amount");
-  // const dummyTransactions = [
-  //   { id: 1, text: "Flower", amount: -20 },
-  //   { id: 2, text: "Salary", amount: 300 },
-  //   { id: 3, text: "Book", amount: -10 },
-  //   { id: 4, text: "Camera", amount: 150 },
-  // ];
-  
-  // let transactions = dummyTransactions;
-  
-  //last 
-  const localStorageTransactions = JSON.parse(localStorage.getItem('transactions'));
-  
-  let transactions = localStorage.getItem('transactions') !== null ? localStorageTransactions : [];
-  
-  //5
-  //Add Transaction
-  function addTransaction(e){
-    e.preventDefault();
-    if(text.value.trim() === '' || amount.value.trim() === ''){
-      alert('please add text and amount')
-    }else{
-      const transaction = {
-        id:generateID(),
-        text:text.value,
-        amount:+amount.value
-      }
-  
-      transactions.push(transaction);
-  
-      addTransactionDOM(transaction);
-      updateValues();
-      updateLocalStorage();
-      text.value='';
-      amount.value='';
+const startBtn = document.querySelector('.start-btn');
+const popupInfo = document.querySelector('.popup-info');
+const main = document.querySelector('.main');
+const exitBtn = document.querySelector('.exit-btn');
+const continueBtn = document.querySelector('.continue-btn');
+const quizSection = document.querySelector('.quiz-section');
+const quizBox = document.querySelector('.quiz-box');
+const resultBox = document.querySelector('.result-box');
+const tryAgainBtn = document.querySelector('.tryAgain-btn');
+const goHomeBtn = document.querySelector('.goHome-btn');
+const timerDiv = document.getElementById("timer");
+
+startBtn.onclick = () => {
+    popupInfo.classList.add('active');
+    main.classList.add('active');
+}
+
+exitBtn.onclick = () => {
+    popupInfo.classList.remove('active');
+    main.classList.remove('active');
+}
+
+continueBtn.onclick = () => {
+    quizSection.classList.add('active');
+    popupInfo.classList.remove('active');
+    main.classList.remove('active');
+    quizBox.classList.add('active');
+    showQuestion(0);
+    questionCounter(1);
+    headerScore();
+}
+
+let questionCount = 0;
+let questionNumb = 1;
+let userScore = 0;
+let timer;
+
+const nextBtn = document.querySelector('.next-btn');
+
+nextBtn.onclick = () => {
+    if (questionCount < questions.length -1){
+    questionCount++;
+    showQuestion(questionCount);
+    questionNumb++;
+    questionCounter(questionNumb);
+    nextBtn.classList.remove('active');
     }
-  }
-  
-  
-  //5.5
-  //Generate Random ID
-  function generateID(){
-    return Math.floor(Math.random()*1000000000);
-  }
-  
-  //2
-  
-  //Add Trasactions to DOM list
-  function addTransactionDOM(transaction) {
-    //GET sign
-    const sign = transaction.amount < 0 ? "-" : "+";
-    const item = document.createElement("li");
-  
-    //Add Class Based on Value
-    item.classList.add(
-      transaction.amount < 0 ? "minus" : "plus"
-    );
-  
-    item.innerHTML = `
-      ${transaction.text} <span>${sign}${Math.abs(
-      transaction.amount
-    )}</span>
-      <button class="delete-btn" onclick="removeTransaction(${transaction.id})">x</button>
-      `;
-    list.appendChild(item);
-  }
-  
-  //4
-  
-  //Update the balance income and expence
-  function updateValues() {
-    const amounts = transactions.map(
-      (transaction) => transaction.amount
-    );
-    const total = amounts
-      .reduce((acc, item) => (acc += item), 0)
-      .toFixed(2);
-    const income = amounts
-      .filter((item) => item > 0)
-      .reduce((acc, item) => (acc += item), 0)
-      .toFixed(2);
-    const expense =
-      (amounts
-        .filter((item) => item < 0)
-        .reduce((acc, item) => (acc += item), 0) *
-      -1).toFixed(2);
-  
-      balance.innerText=`$${total}`;
-      money_plus.innerText = `$${income}`;
-      money_minus.innerText = `$${expense}`;
-  }
-  
-  
-  //6 
-  
-  //Remove Transaction by ID
-  function removeTransaction(id){
-    transactions = transactions.filter(transaction => transaction.id !== id);
-    updateLocalStorage();
-    Init();
-  }
-  //last
-  //update Local Storage Transaction
-  function updateLocalStorage(){
-    localStorage.setItem('transactions',JSON.stringify(transactions));
-  }
-  
-  //3
-  
-  //Init App
-  function Init() {
-    list.innerHTML = "";
-    transactions.forEach(addTransactionDOM);
-    updateValues();
-  }
-  
-  Init();
-  
-  form.addEventListener('submit',addTransaction);
+    else{
+        showResultBox();
+    }
+}
+
+
+
+
+const optionlist = document.querySelector('.option-list')
+
+function showQuestion (index){
+    const questionText = document.querySelector('.question-text');
+    questionText.textContent = `${questions[index].numb}.${questions[index].question}`;
+let optionTag = `<div class="option"><span>${questions[index].options[0]}</span></div>
+<div class="option"><span>${questions[index].options[1]}</span></div>
+<div class="option"><span>${questions[index].options[2]}</span></div>
+<div class="option"><span>${questions[index].options[3]}</span></div>`;
+
+
+optionlist.innerHTML = optionTag;
+const option = document.querySelectorAll('.option');
+for (let i = 0; i < option.length; i++){
+    option[i].setAttribute('onclick', 'optionSelected(this)');
+}
+
+// Display the timer
+let timeLeft = 30; // 30 seconds
+updateTimerDisplay();
+
+timer = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+    if (timeLeft === 0) {
+        clearTimeout(timer);
+        nextQuestion();
+    }
+}, 1000);
+
+function updateTimerDisplay() {
+    timerDiv.innerHTML = `Time Left: ${timeLeft} seconds`;
+}
+}
+
+function nextQuestion() {
+    questionCount++;
+    showQuestion(questionCount);
+    questionNumb++;
+    questionCounter(questionNumb);
+}
+
+function optionSelected(answer){
+    let userAnswer = answer.textContent;
+    let correctAnswer = questions[questionCount].answer;
+    let allOption = optionlist.children.length;
+    clearInterval(timer);
+    if (userAnswer == correctAnswer){
+    answer.classList.add('correct');
+    userScore += 1;
+    headerScore();
+    }
+    else{
+        answer.classList.add('incorrect');
+
+        for (let i = 0; i < allOption; i++){
+            if (optionlist.children[i].textContent == correctAnswer){
+                optionlist.children[i].setAttribute('class', 'option correct');
+            }
+        }
+    }
+
+    for (let i = 0; i < allOption; i++){
+        optionlist.children[i].classList.add('disabled');
+    }
+
+    nextBtn.classList.add('active');
+}
+
+
+function questionCounter(index){
+    const questionTotal = document.querySelector('.quiz-total');
+    questionTotal.textContent = `${index} of ${questions.length} Questions`;
+}
+
+function headerScore (){
+    const headerScoreText = document.querySelector('.header-score');
+    headerScoreText.textContent = `Score: ${userScore} / ${questions.length}`; 
+}
+
+function showResultBox (){
+    quizBox.classList.remove('active');
+    resultBox.classList.add('active');
+
+    const scoreText = document.querySelector('.score-text');
+    scoreText.textContent = `Your Score ${userScore} / ${questions.length}`;
+
+    const cirlularProgress = document.querySelector('.circular-progress')
+    const progressValue = document.querySelector('.progress-value')
+
+    let progressStartValue = -1;
+    let progressEndValue = (userScore / questions.length) * 100;
+    let speed = 10;
+
+    let progress = setInterval(()=>{
+        progressStartValue++;
+        if (progressStartValue == progressEndValue){
+            clearInterval(progress);
+        }
+        progressValue.textContent = `${progressStartValue}`;
+        cirlularProgress.style.background = `conic-gradient(#c40094 ${progressStartValue * 3.6}deg, rgba(255, 255, 255, .1)0deg)`;
+    },speed)
+}
+
+tryAgainBtn.onclick = () => {
+    quizBox.classList.add('active');
+    nextBtn.classList.remove('active')
+    resultBox.classList.remove('active')
+
+    questionCount = 0;
+    questionNumb = 1;
+    userScore = 0;
+    showQuestion(questionCount);
+    questionCounter(questionNumb);
+
+    headerScore();
+}
+
+goHomeBtn.onclick = () => {
+    quizSection.classList.remove('active');
+    nextBtn.classList.remove('active')
+    resultBox.classList.remove('active')
+
+    questionCount = 0;
+    questionNumb = 1;
+    userScore = 0;
+    showQuestion(questionCount);
+    questionCounter(questionNumb);
+}
+
