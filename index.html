@@ -1,55 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <title>Balance Tracker</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <h2>BALANCE TRACKER</h2>
-    <div class="container">
-      <h4>Your Balance</h4>
-      <h1 id="balance">$0.00</h1>
-      <div class="inc-exp-container">
-        <div>
-          <h4>Income</h4>
-          <p id="money-plus" class="money-plus">
-            +$0.00
-          </p>
-        </div>
-        <div>
-          <h4>Expense</h4>
-          <p id="money-minus" class="money-minus">
-            -$0.00
-          </p>
-        </div>
-      </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="main">
+        <header class="header">
+            <a href="#" class="logo">Quiz.</a>
+        </header>
+    
+        <div class="container">
+            <section class="quiz-section">
+                <div class="quiz-box">
+                    <h1> Quiz</h1>
+                    <div class="quiz-header">
+                        <!-- <span>Website Question</span> -->
+                        <span class="header-score">Score: 0 / 10</span>
+                        <span id="timer"></span>
+                    </div>
+                    <h2 class="question-text">What does HTML stand for?</h2>
 
-      <h3>History</h3>
-      <ul id="list" class="list">
-        <!-- <li class="minus">
-          Cash <span>-$400</span
-          ><button class="delete-btn">x</button>
-        </li> -->
-      </ul>
-      <h3>Add New Transition</h3>
-      <form id="form">
-          <div class="form-control">
-              <label for="text">Text</label>
-              <input type="text" id="text" placeholder="Enter Text...."/>
-          </div>
-          <div class="form-control">
-              <label for="amount">Amount <br></label>
-              <input type="number" id="amount" placeholder="Enter amount..."> 
-          </div>
-          <button class="btn">All transaction</button>
-      </form>
+                    <div class="option-list">
+                        <!-- <div class="option">
+                            <span>A. Hyper Type Multi Language</span>
+                        </div>
+
+                        <div class="option">
+                            <span>B. Hyper Text Multiple Language</span>
+                        </div>
+
+                        <div class="option">
+                            <span>C. Hyper Text Markup Language</span>
+                        </div>
+
+                        <div class="option">
+                            <span>D. Home Text Multi Language</span>
+                        </div> -->
+                    </div>
+                    <div class="quiz-footer">
+                        <span class="quiz-total">1 of 10 Questions</span>
+                        <button class="next-btn">Next</button>
+                    </div>
+                </div>
+                <div class="result-box">
+                    <h2>Quiz Result</h2>
+                    <div class="percentage-container">
+                        <div class="circular-progress">
+                            <span class="progress-value">0%</span>
+                        </div>
+                        <span class="score-text">Your Score 0 out of 10</span>
+                    </div>
+                    <div class="button">
+                        <button class="tryAgain-btn">Try Again</button>
+                        <button class="goHome-btn">Go To Home</button>
+                    </div>
+                </div>
+            </section>
+
+    <section class="home">
+        <div class="home-content">
+            <h1>Quiz</h1>
+            <p>This Quiz Is According To HTML CSS And JavaScript.</p>
+            <button class="start-btn">Start Quiz</button>
+        </div>
+    </section>
+        </div>
+    </main>
+
+    <div class="popup-info">
+        <h2>Quiz Guide</h2>
+        <span class="info">1. You have a 30 second for one question.</span>
+        <span class="info">2. Every question contain 10 marks.</span>
+        <span class="info">3. Take a screenshot of your score at 70% you can pass this test</span>
+
+        <div class="btn-group">
+            <button class="info-button exit-btn">Exit Quiz</button>
+            <a href="#" class="info-button continue-btn">Continue</a>
+        </div>
     </div>
-    <!-- JavaYscript Project  -->
+
     <script src="script.js"></script>
-  </body>
+    <script src="question.js"></script>
+
+</body>
 </html>
